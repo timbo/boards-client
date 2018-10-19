@@ -31,7 +31,8 @@ export default {
     return {
       newColumn: {
         name: '',
-        board_id: this.$route.params.id
+        board_id: this.$route.params.id,
+        tasks: []
       },
     };
   },

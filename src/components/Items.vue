@@ -6,20 +6,26 @@
         <textarea name="name" rows="8" cols="20" placeholder="Descripton" v-model="newItem.description"></textarea>
         <button type="submit" name="button">Create</button>
         <hr>
-        <div v-for="task in column.tasks" class="task">
-          <input @change="updateItem(task)" type="text" v-model="task.name">
-          <textarea @change="updateItem(task)" v-model="task.description" rows="8" cols="15"></textarea>
-          <button @click.prevent="deleteItem(task)">Delete</button>
-        </div>
+        <draggable class="dragArea" v-model="column.tasks" @change="onChange" :options="{group:'tasks'}">
+          <div v-for="task in column.tasks" class="task" :key="task.id">
+            <input @change="updateItem(task)" type="text" v-model="task.name">
+            <textarea @change="updateItem(task)" v-model="task.description" rows="8" cols="15"></textarea>
+            <button @click.prevent="deleteItem(task)">Delete</button>
+          </div>
+        </draggable>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+import draggable from 'vuedraggable'
+import _ from 'lodash'
+
 export default {
   name: 'ItemList',
   props: ['columnId'],
+  components: { draggable },
   data() {
     return {
       newItem: {
@@ -45,6 +51,13 @@ export default {
     deleteItem (item) {
       this.$store.dispatch('DELETE_ITEM', item)
     },
+    onChange (event) {
+      if (event.added) {
+        this.column.tasks.find(task => task.id === event.added.element.id).column_id = this.column.id
+      }
+      this.column.tasks.forEach((task, index) => task.position = index + 1)
+      this.$store.dispatch('UPDATE_COLUMN', this.column)
+    },
   }
 };
 </script>
@@ -55,5 +68,9 @@ export default {
     border: 1px solid black;
     margin: .5em;
     padding: .5em;
+  }
+  .dragArea {
+    min-height: 200px;
+    display: block;
   }
 </style>

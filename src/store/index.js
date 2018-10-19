@@ -4,11 +4,11 @@ import Axios from 'axios';
 import _ from 'lodash';
 
 Vue.use(Vuex);
-const serverURL = 'http://localhost:3000';
+const serverURL = 'http://localhost:4000';
 const store = new Vuex.Store({
   state: {
     boards: [],
-    currentBoard: {},
+    currentBoard: { tasks: []},
   },
   actions: {
     CREATE_BOARD(context, board) {
@@ -118,6 +118,7 @@ const store = new Vuex.Store({
       });
     },
     UPDATE_COLUMN(state, column) {
+      column.tasks_attributes 
       Axios.put(`${serverURL}/columns/${column.id}`, column).then(response => {
         state.currentBoard.columns.find((column) => column.id === response.data.id).name = response.data.name
       }, (response) => {
