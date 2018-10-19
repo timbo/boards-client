@@ -2,8 +2,11 @@
   <div class="boards">
     <h1>Create a new board!</h1>
     <div v-for="board in boards">
-      <div><router-link :to="{ path: `board/${board.id}`}" >{{ board.name }}</router-link> <button v-on:click="deleteBoard(board.id)">x</button></div>
-      <input @change="updateBoard(board)" v-model="board.name"></input>
+      <div>
+        <router-link :to="{ path: `board/${board.id}`}" >{{ board.name }}</router-link>
+        <input @change="updateBoard(board)" v-model="board.name"></input>
+        <button v-on:click="deleteBoard(board.id)">x</button>
+      </div>
     </div>
     <button v-on:click="createBoard()">Create a board +</button>
     <input v-model="name"></input>

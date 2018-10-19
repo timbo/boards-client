@@ -4,15 +4,19 @@
     <router-link :to="{ name: 'Boards'}">Back to Boards</router-link>
     <div class="grid-container">
       <div class="grid-item" v-for="column in board.columns">
-        <input type="text" @change="updateColumn(column)" v-model="column.name">
-        <button @click="deleteColumn(column)">X</button>
+        <div class="row">
+          <input type="text" @change="updateColumn(column)" v-model="column.name">
+          <button @click="deleteColumn(column)">X</button>
+        </div>
         <hr>
         <items :columnId="column.id"></items>
       </div>
-      <div class="createColumm grid-item">
+      <div class="createColumm">
         <form class="" @submit.prevent="createColumm()">
-          <input type="text" name="name" placeholder="New list column..." v-model="newColumn.name">
-          <button type="submit" name="button">Create</button>
+          <div class="row">
+            <input type="text" name="name" placeholder="New list column..." v-model="newColumn.name">
+            <button type="submit" name="button">Create</button>
+          </div>
         </form>
       </div>
     </div>
@@ -61,6 +65,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .grid-container {
+  max-width: 400px;
   display: grid;
   grid-auto-flow: column;
   grid-column-gap: 1em;
@@ -68,9 +73,18 @@ export default {
 }
 
 .grid-item {
+  max-width: 400px;
   grid-column-start: auto;
   grid-column-end: auto;
   border: 1px solid black;
   padding: 1em;
+}
+.createColumn {
+  max-width: 400px;
+  grid-column-start: auto;
+  grid-column-end: auto;
+}
+.row {
+  display: flex;
 }
 </style>

@@ -3,13 +3,13 @@
     <div class="createItem">
       <form class="" @submit.prevent="createItem(columnId)">
         <input type="text" name="name" placeholder="Item name" v-model="newItem.name">
-        <textarea name="name" rows="8" cols="20" placeholder="Descripton" v-model="newItem.description"></textarea>
+        <textarea name="name" rows="6" cols="20" placeholder="Descripton" v-model="newItem.description"></textarea>
         <button type="submit" name="button">Create</button>
         <hr>
         <draggable class="dragArea" v-model="column.tasks" @change="onChange" :options="{group:'tasks'}">
           <div v-for="task in column.tasks" class="task" :key="task.id">
             <input @change="updateItem(task)" type="text" v-model="task.name">
-            <textarea @change="updateItem(task)" v-model="task.description" rows="8" cols="15"></textarea>
+            <textarea @change="updateItem(task)" v-model="task.description" rows="6" cols="20"></textarea>
             <button @click.prevent="deleteItem(task)">Delete</button>
           </div>
         </draggable>
