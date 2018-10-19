@@ -1,14 +1,5 @@
-# boards-client
+This is the Client half of a simple Trello clone, built with Vue.js
 
-> A Vue.js project
+To run this project locally first run ```npm install``` to install dependancies.
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-server will run on http://localhost:8080
+Next run ```npm run dev``` to start the webserver which will run at http://localhost:8080
